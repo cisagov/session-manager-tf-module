@@ -1,24 +1,19 @@
-output "arn" {
-  value       = aws_instance.example.arn
-  description = "The EC2 instance ARN."
+output "ssm_document_name" {
+  description = "Name of the SSM document that can be used to create SSM SessionManager session in this account."
+  value       = module.session-manager-settings.document_name
 }
 
-output "availability_zone" {
-  value       = aws_instance.example.availability_zone
-  description = "The AZ where the EC2 instance is deployed."
+output "ssm_document_arn" {
+  description = "ARN of the SSM document that can be used to create SSM SessionManager session in this account."
+  value       = module.session-manager-settings.document_arn
 }
 
-output "id" {
-  value       = aws_instance.example.id
-  description = "The EC2 instance ID."
+output "ssm_session_bucket" {
+  description = "The S3 bucket where SSM session logs will be stored."
+  value       = aws_s3_bucket.ssm_sessions
 }
 
-output "private_ip" {
-  value       = aws_instance.example.private_ip
-  description = "The private IP of the EC2 instance."
-}
-
-output "subnet_id" {
-  value       = aws_instance.example.subnet_id
-  description = "The ID of the subnet where the EC2 instance is deployed."
+output "ssm_session_log_group" {
+  description = "The CloudWatch log group where SSM session logs will be stored."
+  value       = aws_cloudwatch_log_group.ssm_sessions
 }
