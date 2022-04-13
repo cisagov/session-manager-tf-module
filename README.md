@@ -73,6 +73,7 @@ module "example" {
 | ssm\_document\_name | Name of the SSM document that can be used to create SSM SessionManager session in this account. |
 | ssm\_session\_bucket | The S3 bucket where SSM session logs will be stored. |
 | ssm\_session\_log\_group | The CloudWatch log group where SSM session logs will be stored. |
+| ssm\_session\_role | The IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account. |
 
 ## Notes ##
 
