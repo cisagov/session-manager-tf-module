@@ -22,6 +22,12 @@ variable "cloudwatch_log_group_retention" {
   type        = number
 }
 
+variable "linux_shell_profile" {
+  description = "The shell setup to run when connecting to a Linux instance."
+  default     = "exec bash; cd"
+  type        = string
+}
+
 variable "other_accounts" {
   default     = []
   description = "A list of account IDs, each of which corresponds to an account to which access to the IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account will be delegated."
@@ -37,5 +43,11 @@ variable "ssm_session_role_description" {
 variable "ssm_session_role_name" {
   description = "The name to assign the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account."
   default     = "StartStopSSMSession"
+  type        = string
+}
+
+variable "windows_shell_profile" {
+  description = "The shell setup to run when connecting to a Windows instance."
+  default     = ""
   type        = string
 }

@@ -12,8 +12,8 @@ resource "aws_ssm_document" "session_manager_preferences" {
       cloudWatchLogGroupName      = aws_cloudwatch_log_group.ssm_sessions.name
       cloudWatchStreamingEnabled  = true
       shellProfile = {
-        linux = "bash; cd"
-        # windows = ""
+        linux   = var.linux_shell_profile
+        windows = var.windows_shell_profile
       }
     }
     schemaVersion = "1.0"
