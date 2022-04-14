@@ -55,11 +55,11 @@ No modules.
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | cloudwatch\_log\_group\_name | The name of the log group into which session logs are to be uploaded. | `string` | `"/ssm/session-logs"` | no |
 | cloudwatch\_log\_group\_retention | The number of days that SSM session logs will be retained in CloudWatch. | `number` | `365` | no |
-| linux\_shell\_profile | The shell setup to run when connecting to a Linux instance. | `string` | `"exec bash; cd"` | no |
+| linux\_shell\_profile | The shell setup to run when connecting to a Linux instance.  Note that this string cannot be empty. | `string` | `"exec bash; cd"` | no |
 | other\_accounts | A list of account IDs, each of which corresponds to an account to which access to the IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account will be delegated. | `list(string)` | `[]` | no |
 | ssm\_session\_role\_description | The description to associate with the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account. | `string` | `"Allows creation of SSM SessionManager sessions to any EC2 instance in this account."` | no |
 | ssm\_session\_role\_name | The name to assign the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account. | `string` | `"StartStopSSMSession"` | no |
-| windows\_shell\_profile | The shell setup to run when connecting to a Windows instance. | `string` | `""` | no |
+| windows\_shell\_profile | The shell setup to run when connecting to a Windows instance.  Note that this string cannot be empty. | `string` | `"date"` | no |
 
 ## Outputs ##
 

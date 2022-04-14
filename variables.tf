@@ -23,7 +23,7 @@ variable "cloudwatch_log_group_retention" {
 }
 
 variable "linux_shell_profile" {
-  description = "The shell setup to run when connecting to a Linux instance."
+  description = "The shell setup to run when connecting to a Linux instance.  Note that this string cannot be empty."
   default     = "exec bash; cd"
   type        = string
 }
@@ -47,7 +47,7 @@ variable "ssm_session_role_name" {
 }
 
 variable "windows_shell_profile" {
-  description = "The shell setup to run when connecting to a Windows instance."
-  default     = ""
+  description = "The shell setup to run when connecting to a Windows instance.  Note that this string cannot be empty."
+  default     = "date"
   type        = string
 }
