@@ -56,7 +56,6 @@ No modules.
 | cloudwatch\_log\_group\_name | The name of the log group into which session logs are to be uploaded. | `string` | `"/ssm/session-logs"` | no |
 | cloudwatch\_log\_group\_retention | The number of days that SSM session logs will be retained in CloudWatch. | `number` | `365` | no |
 | other\_accounts | A list of account IDs, each of which corresponds to an account to which access to the IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account will be delegated. | `list(string)` | `[]` | no |
-| s3\_bucket\_name\_prefix | The prefix of the name of the S3 bucket in which session logs are to be stored.  A random string will be appended to this prefix in order to create a unique S3 bucket name. | `string` | `"ssm-session-logs-"` | no |
 | ssm\_session\_role\_description | The description to associate with the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account. | `string` | `"Allows creation of SSM SessionManager sessions to any EC2 instance in this account."` | no |
 | ssm\_session\_role\_name | The name to assign the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account. | `string` | `"StartStopSSMSession"` | no |
 
