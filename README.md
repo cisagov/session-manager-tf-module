@@ -3,7 +3,14 @@
 [![GitHub Build Status](https://github.com/cisagov/session-manager-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/session-manager-tf-module/actions)
 
 A Terraform module for setting up and configuring logging for AWS
-Session Manager access in an AWS account.
+Session Manager access in an AWS account.  After applying this module
+users can create the following types of sessions:
+
+- Interactive command sessions
+- Non-interactive command sessions
+- Port forwarding sessions
+- Port forwarding to socket sessions
+- Shell sessions
 
 ## Usage ##
 
