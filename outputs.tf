@@ -10,5 +10,5 @@ output "ssm_session_log_group" {
 
 output "ssm_session_role" {
   description = "The IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account.  Users will assume this role in order to create sessions to EC2 instances."
-  value       = aws_iam_role.ssmsession_role
+  value       = aws_iam_role.ssm_session_role
 }

@@ -34,13 +34,13 @@ variable "s3_bucket_name_prefix" {
   type        = string
 }
 
-variable "ssmsession_role_description" {
+variable "ssm_session_role_description" {
   description = "The description to associate with the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account."
   default     = "Allows creation of SSM SessionManager sessions to any EC2 instance in this account."
   type        = string
 }
 
-variable "ssmsession_role_name" {
+variable "ssm_session_role_name" {
   description = "The name to assign the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account."
   default     = "StartStopSSMSession"
   type        = string

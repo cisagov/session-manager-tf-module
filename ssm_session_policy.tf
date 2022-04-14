@@ -3,7 +3,7 @@
 # sessions to any EC2 instance in this account.
 # ------------------------------------------------------------------------------
 
-data "aws_iam_policy_document" "ssmsession_doc" {
+data "aws_iam_policy_document" "ssm_session_doc" {
   # Allow the user to start a session
   statement {
     actions = [
@@ -66,8 +66,8 @@ data "aws_iam_policy_document" "ssmsession_doc" {
   }
 }
 
-resource "aws_iam_policy" "ssmsession_policy" {
-  description = var.ssmsession_role_description
-  name        = var.ssmsession_role_name
-  policy      = data.aws_iam_policy_document.ssmsession_doc.json
+resource "aws_iam_policy" "ssm_session_policy" {
+  description = var.ssm_session_role_description
+  name        = var.ssm_session_role_name
+  policy      = data.aws_iam_policy_document.ssm_session_doc.json
 }
