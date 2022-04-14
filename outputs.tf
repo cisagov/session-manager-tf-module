@@ -1,11 +1,6 @@
-output "ssm_document_name" {
-  description = "Name of the SSM document that can be used to create SSM SessionManager session in this account."
-  value       = module.session-manager-settings.document_name
-}
-
-output "ssm_document_arn" {
-  description = "ARN of the SSM document that can be used to create SSM SessionManager session in this account."
-  value       = module.session-manager-settings.document_arn
+output "ssm_document" {
+  description = "The SSM document that can be used to create SSM SessionManager session in this account."
+  value       = aws_ssm_document.session_manager_preferences
 }
 
 output "ssm_session_bucket" {
