@@ -30,18 +30,18 @@ variable "linux_shell_profile" {
 
 variable "other_accounts" {
   default     = []
-  description = "A list of account IDs, each of which corresponds to an account to which access to the IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account will be delegated."
+  description = "A list of account IDs, each of which corresponds to an account to which access to the IAM role that allows creation of SSM Session Manager sessions to any EC2 instance in this account will be delegated."
   type        = list(string)
 }
 
 variable "ssm_session_role_description" {
-  description = "The description to associate with the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account."
-  default     = "Allows creation of SSM SessionManager sessions to any EC2 instance in this account."
+  description = "The description to associate with the IAM role (and policy) that allows creation of SSM Session Manager sessions to any EC2 instance in this account."
+  default     = "Allows creation of SSM Session Manager sessions to any EC2 instance in this account."
   type        = string
 }
 
 variable "ssm_session_role_name" {
-  description = "The name to assign the IAM role (and policy) that allows creation of SSM SessionManager sessions to any EC2 instance in this account."
+  description = "The name to assign the IAM role (and policy) that allows creation of SSM Session Manager sessions to any EC2 instance in this account."
   default     = "StartStopSSMSession"
   type        = string
 }

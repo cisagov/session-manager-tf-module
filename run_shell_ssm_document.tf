@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # Create an SSM Document that allows creation of and configures
-# parameters for SSM SessionManager sessions in this account.
+# parameters for SSM Session Manager sessions in this account.
 # ------------------------------------------------------------------------------
 resource "aws_ssm_document" "session_manager_preferences" {
   content = jsonencode({

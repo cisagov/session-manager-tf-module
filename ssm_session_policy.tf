@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Create the IAM policy that allows creation of SSM SessionManager
+# Create the IAM policy that allows creation of SSM Session Manager
 # sessions to any EC2 instance in this account.
 # ------------------------------------------------------------------------------
 
