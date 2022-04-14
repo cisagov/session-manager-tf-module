@@ -30,7 +30,6 @@ module "example" {
 | Name | Version |
 |------|---------|
 | aws | ~> 3.38 |
-| random | ~> 3.1 |
 
 ## Modules ##
 
@@ -44,10 +43,7 @@ No modules.
 | [aws_iam_policy.ssmsession_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.ssmsession_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.ssmsession_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_s3_bucket.ssm_sessions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_public_access_block.ssm_sessions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_ssm_document.session_manager_preferences](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_document) | resource |
-| [random_id.bucket](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume_role_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.ssmsession_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -69,9 +65,8 @@ No modules.
 | Name | Description |
 |------|-------------|
 | ssm\_document | The SSM document that can be used to create SSM SessionManager session in this account. |
-| ssm\_session\_bucket | The S3 bucket where SSM session logs will be stored. |
 | ssm\_session\_log\_group | The CloudWatch log group where SSM session logs will be stored. |
-| ssm\_session\_role | The IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account. |
+| ssm\_session\_role | The IAM role that allows creation of SSM SessionManager sessions to any EC2 instance in this account.  Users will assume this role in order to create sessions to EC2 instances. |
 
 ## Notes ##
 
