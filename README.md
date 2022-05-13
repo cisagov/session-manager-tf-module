@@ -2,27 +2,21 @@
 
 [![GitHub Build Status](https://github.com/cisagov/session-manager-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/session-manager-tf-module/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+A Terraform module for setting up and configuring logging for AWS
+Session Manager access in an AWS account.  After applying this module
+users can create the following types of sessions:
 
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+- Interactive command sessions
+- Non-interactive command sessions
+- Port forwarding sessions
+- Port forwarding to socket sessions
+- Shell sessions
 
 ## Usage ##
 
 ```hcl
 module "example" {
   source = "github.com/cisagov/session-manager-tf-module"
-
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
 }
 ```
 
@@ -36,6 +30,7 @@ module "example" {
 |------|---------|
 | terraform | ~> 1.0 |
 | aws | ~> 3.38 |
+| random | ~> 3.1 |
 
 ## Providers ##
 
@@ -51,28 +46,35 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_instance.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
-| [aws_ami.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
-| [aws_default_tags.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/default_tags) | data source |
+| [aws_cloudwatch_log_group.ssm_sessions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_iam_policy.ssm_session_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.ssm_session_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.ssm_session_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_ssm_document.session_manager_preferences](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_document) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.assume_role_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.ssm_session_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami\_owner\_account\_id | The ID of the AWS account that owns the Example AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `"self"` | no |
-| aws\_availability\_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.). | `string` | `"a"` | no |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
-| subnet\_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0). | `string` | n/a | yes |
+| cloudwatch\_log\_group\_name | The name of the log group into which session logs are to be uploaded. | `string` | `"/ssm/session-logs"` | no |
+| cloudwatch\_log\_group\_retention | The number of days that SSM session logs will be retained in CloudWatch. | `number` | `365` | no |
+| linux\_shell\_profile | The shell setup to run when connecting to a Linux instance.  Note that this string cannot be empty. | `string` | `"exec bash; cd"` | no |
+| other\_accounts | A list of account IDs, each of which corresponds to an account to which access to the IAM role that allows creation of SSM Session Manager sessions to any EC2 instance in this account will be delegated. | `list(string)` | `[]` | no |
+| ssm\_session\_role\_description | The description to associate with the IAM role (and policy) that allows creation of SSM Session Manager sessions to any EC2 instance in this account. | `string` | `"Allows creation of SSM Session Manager sessions to any EC2 instance in this account."` | no |
+| ssm\_session\_role\_name | The name to assign the IAM role (and policy) that allows creation of SSM Session Manager sessions to any EC2 instance in this account. | `string` | `"StartStopSSMSession"` | no |
+| windows\_shell\_profile | The shell setup to run when connecting to a Windows instance.  Note that this string cannot be empty. | `string` | `"date"` | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| arn | The EC2 instance ARN. |
-| availability\_zone | The AZ where the EC2 instance is deployed. |
-| id | The EC2 instance ID. |
-| private\_ip | The private IP of the EC2 instance. |
-| subnet\_id | The ID of the subnet where the EC2 instance is deployed. |
+| ssm\_document | The SSM document that can be used to create SSM Session Manager sessions in this account. |
+| ssm\_session\_log\_group | The CloudWatch log group where SSM session logs will be stored. |
+| ssm\_session\_role | The IAM role that allows creation of SSM Session Manager sessions to any EC2 instance in this account.  Users will assume this role in order to create sessions to EC2 instances. |
 
 ## Notes ##
 
