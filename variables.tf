@@ -26,6 +26,10 @@ variable "linux_shell_profile" {
   description = "The shell setup to run when connecting to a Linux instance.  Note that this string cannot be empty."
   default     = "exec bash; cd"
   type        = string
+  validation {
+    condition     = var.linux_shell_profile != ""
+    error_message = "The Linux shell profile cannot be an empty string."
+  }
 }
 
 variable "other_accounts" {
@@ -50,4 +54,8 @@ variable "windows_shell_profile" {
   description = "The shell setup to run when connecting to a Windows instance.  Note that this string cannot be empty."
   default     = "date"
   type        = string
+  validation {
+    condition     = var.windows_shell_profile != ""
+    error_message = "The Windows shell profile cannot be an empty string."
+  }
 }
