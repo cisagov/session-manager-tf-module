@@ -55,13 +55,25 @@ data "aws_iam_policy_document" "ssm_session_doc" {
     ]
   }
 
-  # Allow the user to terminate his or her own sessions
+  # Allow the user to terminate his or her own sessions.
+  #
+  # The correct way to allow (assume role) users to terminate their
+  # (and only their) sessions is described in Method 2 of this
+  # document:
+  # https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-restrict-access-examples.html#restrict-access-example-user-sessions
   statement {
     actions = [
       "ssm:TerminateSession",
     ]
+    condition {
+      test     = "StringLike"
+      variable = "ssm:resourceTag/aws:ssmmessages:session-id"
+      values = [
+        "&{aws:userid}*",
+      ]
+    }
     resources = [
-      "arn:aws:ssm:${var.aws_region}:${local.this_account_id}:session/&{aws:username}-*",
+      "*",
     ]
   }
 }
