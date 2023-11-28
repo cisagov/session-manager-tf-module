@@ -66,11 +66,11 @@ data "aws_iam_policy_document" "ssm_session_doc" {
       "ssm:TerminateSession",
     ]
     condition {
-      test     = "StringLike"
-      variable = "ssm:resourceTag/aws:ssmmessages:session-id"
+      test = "StringLike"
       values = [
         "&{aws:userid}*",
       ]
+      variable = "ssm:resourceTag/aws:ssmmessages:session-id"
     }
     resources = [
       "*",
