@@ -24,19 +24,20 @@ module "example" {
 
 - [Basic usage](https://github.com/cisagov/session-manager-tf-module/tree/develop/examples/basic_usage)
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 | random | ~> 3.1 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 
 ## Modules ##
 
@@ -75,6 +76,7 @@ No modules.
 | ssm\_document | The SSM document that can be used to create SSM Session Manager sessions in this account. |
 | ssm\_session\_log\_group | The CloudWatch log group where SSM session logs will be stored. |
 | ssm\_session\_role | The IAM role that allows creation of SSM Session Manager sessions to any EC2 instance in this account.  Users will assume this role in order to create sessions to EC2 instances. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 
