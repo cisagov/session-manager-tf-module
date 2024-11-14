@@ -7,24 +7,28 @@
 variable "aws_region" {
   default     = "us-east-1"
   description = "The AWS region to deploy into (e.g. us-east-1)."
+  nullable    = false
   type        = string
 }
 
 variable "cloudwatch_log_group_name" {
   default     = "/ssm/session-logs"
   description = "The name of the log group into which session logs are to be uploaded."
+  nullable    = false
   type        = string
 }
 
 variable "cloudwatch_log_group_retention" {
   default     = 365
   description = "The number of days that SSM session logs will be retained in CloudWatch."
+  nullable    = false
   type        = number
 }
 
 variable "linux_shell_profile" {
   default     = "exec bash; cd"
   description = "The shell setup to run when connecting to a Linux instance.  Note that this string cannot be empty."
+  nullable    = false
   type        = string
   validation {
     condition     = var.linux_shell_profile != ""
@@ -35,24 +39,28 @@ variable "linux_shell_profile" {
 variable "other_accounts" {
   default     = []
   description = "A list of account IDs, each of which corresponds to an account to which access to the IAM role that allows creation of SSM Session Manager sessions to any EC2 instance in this account will be delegated."
+  nullable    = false
   type        = list(string)
 }
 
 variable "ssm_session_role_description" {
   default     = "Allows creation of SSM Session Manager sessions to any EC2 instance in this account."
   description = "The description to associate with the IAM role (and policy) that allows creation of SSM Session Manager sessions to any EC2 instance in this account."
+  nullable    = false
   type        = string
 }
 
 variable "ssm_session_role_name" {
   default     = "StartStopSSMSession"
   description = "The name to assign the IAM role (and policy) that allows creation of SSM Session Manager sessions to any EC2 instance in this account."
+  nullable    = false
   type        = string
 }
 
 variable "windows_shell_profile" {
   default     = "date"
   description = "The shell setup to run when connecting to a Windows instance.  Note that this string cannot be empty."
+  nullable    = false
   type        = string
   validation {
     condition     = var.windows_shell_profile != ""
