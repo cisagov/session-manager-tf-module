@@ -31,7 +31,6 @@ module "example" {
 |------|---------|
 | terraform | >= 1.1 |
 | aws | >= 4.9 |
-| random | ~> 3.1 |
 
 ## Providers ##
 
