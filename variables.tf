@@ -30,6 +30,7 @@ variable "linux_shell_profile" {
   description = "The shell setup to run when connecting to a Linux instance.  Note that this string cannot be empty."
   nullable    = false
   type        = string
+
   validation {
     condition     = var.linux_shell_profile != ""
     error_message = "The Linux shell profile cannot be an empty string."
@@ -62,6 +63,7 @@ variable "windows_shell_profile" {
   description = "The shell setup to run when connecting to a Windows instance.  Note that this string cannot be empty."
   nullable    = false
   type        = string
+
   validation {
     condition     = var.windows_shell_profile != ""
     error_message = "The Windows shell profile cannot be an empty string."
