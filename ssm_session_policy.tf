@@ -18,6 +18,7 @@ data "aws_iam_policy_document" "ssm_session_doc" {
       "arn:aws:ssm:${var.aws_region}::document/AWS-StartPortForwardingSessionToSocket",
       "arn:aws:ssm:${var.aws_region}:${local.this_account_id}:document/SSM-SessionManagerRunShell",
     ]
+
     condition {
       test     = "BoolIfExists"
       variable = "ssm:SessionDocumentAccessCheck"
@@ -55,15 +56,26 @@ data "aws_iam_policy_document" "ssm_session_doc" {
     ]
   }
 
-  # Allow the user to terminate his or her own sessions.
+  # Allow the user to terminate and open a data channel to his or her
+  # own sessions.
   #
-  # The correct way to allow (assume role) users to terminate their
-  # (and only their) sessions is described in Method 2 of this
-  # document:
+  # The correct way to allow (assume role) users to terminate or open
+  # a data channel to their (and only their) sessions is described in
+  # Method 2 of this document:
   # https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-restrict-access-examples.html#restrict-access-example-user-sessions
   statement {
     actions = [
       "ssm:TerminateSession",
+      # Added in response to these instructions sent from AWS via
+      # email:
+      #
+      # Starting a session to a remote instance with AWS Systems
+      # Manager Session Manager takes two calls: ssm:StartSession
+      # returns a token, and ssmmessages:OpenDataChannel uses the
+      # token to open the session. Beginning May 28, 2027, AWS Systems
+      # Manager will require OpenDataChannel to be signed with AWS
+      # Signature Version 4 (SigV4) and allowed by your IAM policies.
+      "ssmmessages:OpenDataChannel"
     ]
     condition {
       test = "StringLike"
@@ -73,7 +85,7 @@ data "aws_iam_policy_document" "ssm_session_doc" {
       variable = "ssm:resourceTag/aws:ssmmessages:session-id"
     }
     resources = [
-      "*",
+      "arn:aws:ssm:${var.aws_region}:*:session/*",
     ]
   }
 }
