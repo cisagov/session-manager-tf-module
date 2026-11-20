@@ -78,9 +78,9 @@ data "aws_iam_policy_document" "ssm_session_doc" {
       "ssmmessages:OpenDataChannel"
     ]
     condition {
-      test = "StringLike"
+      test = "StringEquals"
       values = [
-        "&{aws:userid}*",
+        "&{aws:userid}",
       ]
       variable = "ssm:resourceTag/aws:ssmmessages:session-id"
     }
