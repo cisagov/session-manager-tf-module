@@ -18,7 +18,7 @@ users can create the following types of sessions:
 
 ```hcl
 module "example" {
-  source = "github.com/cisagov/session-manager-tf-module?ref=v1.0.0"
+  source = "github.com/cisagov/session-manager-tf-module?ref=v1.0.1"
 }
 ```
 
